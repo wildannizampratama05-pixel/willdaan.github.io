@@ -142,7 +142,7 @@
             gap: 20px;
         }
 
-        .cart-btn {
+        .cart-btn, .history-btn {
             position: relative;
             background: none;
             border: none;
@@ -153,7 +153,7 @@
             transition: transform 0.3s;
         }
 
-        .cart-btn:hover {
+        .cart-btn:hover, .history-btn:hover {
             transform: scale(1.1);
         }
 
@@ -636,6 +636,188 @@
             opacity: 0.3;
         }
 
+        /* History Modal */
+        .history-modal {
+            max-width: 800px;
+            width: 90%;
+            max-height: 85vh;
+        }
+
+        .history-list {
+            max-height: 60vh;
+            overflow-y: auto;
+            padding: 0 10px;
+        }
+
+        .history-item {
+            background: var(--dark);
+            border: 1px solid rgba(212, 175, 55, 0.1);
+            border-radius: 15px;
+            padding: 20px;
+            margin-bottom: 15px;
+            transition: all 0.3s;
+        }
+
+        .history-item:hover {
+            border-color: rgba(212, 175, 55, 0.3);
+        }
+
+        .history-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 15px;
+            padding-bottom: 15px;
+            border-bottom: 1px solid rgba(255,255,255,0.05);
+        }
+
+        .history-date {
+            display: flex;
+            align-items: center;
+            gap: 8px;
+            color: var(--gold);
+            font-weight: 600;
+            font-size: 14px;
+        }
+
+        .history-date i {
+            font-size: 16px;
+        }
+
+        .history-status {
+            background: rgba(40, 167, 69, 0.2);
+            color: var(--success);
+            padding: 5px 12px;
+            border-radius: 20px;
+            font-size: 11px;
+            font-weight: 600;
+            text-transform: uppercase;
+        }
+
+        .history-products {
+            margin-bottom: 15px;
+        }
+
+        .history-product {
+            display: flex;
+            justify-content: space-between;
+            padding: 8px 0;
+            font-size: 14px;
+            color: var(--text);
+            border-bottom: 1px solid rgba(255,255,255,0.03);
+        }
+
+        .history-product:last-child {
+            border-bottom: none;
+        }
+
+        .history-product-name {
+            color: var(--text);
+        }
+
+        .history-product-qty {
+            color: var(--text-muted);
+            font-size: 12px;
+        }
+
+        .history-product-price {
+            color: var(--gold);
+            font-weight: 600;
+        }
+
+        .history-footer {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding-top: 15px;
+            border-top: 1px solid rgba(212, 175, 55, 0.2);
+        }
+
+        .history-total {
+            font-size: 18px;
+            font-weight: 700;
+            color: var(--gold);
+        }
+
+        .history-total-label {
+            font-size: 12px;
+            color: var(--text-muted);
+            text-transform: uppercase;
+            letter-spacing: 1px;
+        }
+
+        .history-actions {
+            display: flex;
+            gap: 10px;
+        }
+
+        .btn-delete-history, .btn-detail-history {
+            background: none;
+            border: 1px solid rgba(220, 53, 69, 0.3);
+            color: var(--danger);
+            padding: 8px 16px;
+            border-radius: 8px;
+            cursor: pointer;
+            font-size: 12px;
+            transition: all 0.3s;
+            display: flex;
+            align-items: center;
+            gap: 6px;
+        }
+
+        .btn-delete-history:hover {
+            background: rgba(220, 53, 69, 0.2);
+        }
+
+        .btn-detail-history {
+            border-color: rgba(212, 175, 55, 0.3);
+            color: var(--gold);
+        }
+
+        .btn-detail-history:hover {
+            background: rgba(212, 175, 55, 0.1);
+        }
+
+        .btn-clear-all {
+            background: linear-gradient(135deg, var(--danger), #c82333);
+            color: #fff;
+            border: none;
+            padding: 12px 24px;
+            border-radius: 10px;
+            cursor: pointer;
+            font-weight: 600;
+            font-size: 13px;
+            transition: all 0.3s;
+            display: flex;
+            align-items: center;
+            gap: 8px;
+            margin-top: 20px;
+        }
+
+        .btn-clear-all:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 10px 30px rgba(220, 53, 69, 0.3);
+        }
+
+        .empty-history {
+            text-align: center;
+            padding: 60px 20px;
+            color: var(--text-muted);
+        }
+
+        .empty-history i {
+            font-size: 64px;
+            color: var(--gold);
+            margin-bottom: 20px;
+            opacity: 0.3;
+        }
+
+        .empty-history h3 {
+            color: #fff;
+            margin-bottom: 10px;
+            font-size: 20px;
+        }
+
         /* Checkout Modal */
         .modal-overlay {
             position: fixed;
@@ -1029,6 +1211,17 @@
             .cart-sidebar {
                 width: 100%;
             }
+
+            .history-modal {
+                width: 95%;
+                max-height: 90vh;
+            }
+
+            .history-header {
+                flex-direction: column;
+                gap: 10px;
+                align-items: flex-start;
+            }
         }
 
         /* Animations */
@@ -1069,6 +1262,9 @@
             </nav>
             
             <div class="header-actions">
+                <button class="history-btn" onclick="openHistory()" title="Riwayat Pesanan">
+                    <i class="fas fa-history"></i>
+                </button>
                 <button class="cart-btn" onclick="toggleCart()">
                     <i class="fas fa-shopping-cart"></i>
                     <span class="cart-count" id="cartCount">0</span>
@@ -1122,7 +1318,10 @@
             
             <div style="text-align: center; padding: 30px;">
                 <div style="width: 80px; height: 80px; background: linear-gradient(135deg, var(--gold), var(--gold-dark)); border-radius: 20px; display: flex; align-items: center; justify-content: center; margin: 0 auto 20px; font-size: 32px; color: var(--black);">
-                    <i class="fas fa-shipping-fast"></i>
+                    <i class="fas fa-store"></i>
+                </div>
+                <h3 style="color: #fff; margin-bottom: 10px; font-size: 18px;">Ambil di Bengkel</h3>
+                <p style="color: var(--text-muted); font-size: 14px; line-height: 1.6;">Langsung ambil barang di bengkel kami dengan pemeriksaan kualitas sebelum dibawa pulang.</p>
             </div>
             
             <div style="text-align: center; padding: 30px;">
@@ -1140,6 +1339,8 @@
                 <h3 style="color: #fff; margin-bottom: 10px; font-size: 18px;">Garansi Produk</h3>
                 <p style="color: var(--text-muted); font-size: 14px; line-height: 1.6;">Setiap pembelian dilindungi garansi resmi dan uang kembali.</p>
             </div>
+        </div>
+    </section>
 
     <!-- Footer -->
     <footer id="contact">
@@ -1165,7 +1366,7 @@
                     <li><a href="#">Kampas Rem</a></li>
                     <li><a href="#">Oli Mesin</a></li>
                     <li><a href="#">Filter Oli</a></li>
-                    <li><a href="#">Aki Mobil</a></li>
+                    <li><a href="#">Dan Lain-Lain</a></li>
                 </ul>
             </div>
             
@@ -1173,7 +1374,7 @@
                 <h4 style="color: var(--gold); font-size: 14px; text-transform: uppercase; letter-spacing: 2px; margin-bottom: 20px;">Kontak Kami</h4>
                 <p><i class="fab fa-whatsapp"></i> 0858-5467-8904</p>
                 <p><i class="fas fa-envelope"></i> info@autopro.id</p>
-                <p><i class="fas fa-map-marker-alt"></i> Jakarta, Indonesia</p>
+                <p><i class="fas fa-map-marker-alt"></i> Tanggul Jember Jawa Timur, Indonesia</p>
                 <p><i class="fas fa-clock"></i> Senin - Sabtu: 08.00 - 20.00</p>
             </div>
         </div>
@@ -1214,6 +1415,24 @@
             <button class="checkout-btn" onclick="openCheckout()">
                 <i class="fas fa-credit-card"></i> Beli Sekarang
             </button>
+        </div>
+    </div>
+
+    <!-- History Modal -->
+    <div class="modal-overlay" id="historyModal">
+        <div class="modal history-modal">
+            <button class="close-modal" onclick="closeHistory()">
+                <i class="fas fa-times"></i>
+            </button>
+            <div class="modal-header">
+                <h2><i class="fas fa-history"></i> Riwayat Pesanan</h2>
+                <p>Daftar semua pesanan yang pernah Anda lakukan</p>
+            </div>
+            <div class="modal-body">
+                <div id="historyContent">
+                    <!-- History items will be inserted here -->
+                </div>
+            </div>
         </div>
     </div>
 
@@ -1313,9 +1532,9 @@
         const products = [
             {
                 id: 1,
-                name: "Kampas Rem Depan",
+                name: "Kampas Rem Depan Original Toyota Dan Daihatsu",
                 category: "Sistem Pengereman",
-                description: "Kampas rem depan berkualitas tinggi. Material premium dengan daya cengkeram optimal.",
+                description: "Kampas rem depan berkualitas tinggi. Material premium dengan daya cengkeram optimal.bisa untuk Toyota Avanza dan Rush Daihatsu Xenia dan Terios 2004-2018.",
                 price: 285000,
                 image: "https://kimi-web-img.moonshot.cn/img/image.made-in-china.com/291222297a8a80e8938c09be0467bfdfdb4ebf12.jpg"
             },
@@ -1323,15 +1542,15 @@
                 id: 2,
                 name: "Oli Mesin Shell Helix HX6 10W-40",
                 category: "Pelumas Mesin",
-                description: "Oli mesin premium 4 liter untuk mesin bensin. Proteksi maksimal dengan teknologi Active Cleansing.",
-                price: 425000,
+                description: "Oli mesin premium 4 liter untuk mesin bensin. Proteksi maksimal dengan teknologi Active Cleansing bisa untuk mobil berjenis MPV,LMPV,LCGC.",
+                price: 399000,
                 image: "https://kimi-web-img.moonshot.cn/img/www.static-src.com/a3e7d23b444cde0c65d2d2c65768dba47052b8c4.jpg"
             },
             {
                 id: 3,
-                name: "Filter Oli Mobil",
+                name: "Filter Oli Mobil Toyota Dan Daihatsu",
                 category: "Filter",
-                description: "Filter oli berkualitas OEM untuk menjaga kebersihan oli mesin. Umur pakai panjang dan performa optimal.",
+                description: "Filter oli berkualitas OEM untuk menjaga kebersihan oli mesin. Umur pakai panjang dan performa optimal bisa untuk mobil seperti Toyota Avanza,Rush,Calya dan Daihatsu Xenia,Terios,Sigra 2016-2026.",
                 price: 75000,
                 image: "https://kimi-web-img.moonshot.cn/img/wuling.id/61887acca86994b646a043dd727a525d10bf7bee.jpg"
             },
@@ -1339,39 +1558,39 @@
                 id: 4,
                 name: "Aki Mobil 12V 150Ah LiFePO4",
                 category: "Kelistrikan",
-                description: "Aki lithium premium 12V 150Ah dengan teknologi LiFePO4. Tahan lama, ringan, dan performa stabil.",
+                description: "Aki lithium premium 12V 150Ah dengan teknologi LiFePO4. Tahan lama, ringan, dan performa stabil.bisa digunakan untuk mobil jenis SUV&MPV seperti Toyota Land Cruiser, Fortuner, Mitsubishi Pajero Sport, Nissan Terra, atau tipe MPV yang membutuhkan daya elektrikal besar.",
                 price: 2850000,
                 image: "https://kimi-web-img.moonshot.cn/img/image.made-in-china.com/b908ae18ef451f374f02783fb5cfceed91cf01ae.webp"
             },
             {
                 id: 5,
-                name: "Shockbreaker Depan Kayaba",
+                name: "Shockbreaker Depan Original Aspira Toyota Dan Daihatsu",
                 category: "Suspensi",
-                description: "Shockbreaker depan premium. Kenyamanan berkendara maksimal dengan daya redam optimal.",
-                price: 1850000,
+                description: "Shockbreaker depan Aspira. Kenyamanan berkendara maksimal dengan daya redam optimal.bisa untuk Toyota Avanza dan Daihatsu Xenia 2004-2011",
+                price: 550000,
                 image: "https://kimi-web-img.moonshot.cn/img/www.static-src.com/9d9ec238f0d9be597514692bad99b8afd179c0bf.jpg"
             },
             {
                 id: 6,
                 name: "Lampu LED Headlight H4 8000LM",
                 category: "Pencahayaan",
-                description: "Lampu utama LED H4 dengan output 8000 lumens. Cahaya terang putih dengan konsumsi daya rendah.",
-                price: 325000,
+                description: "Lampu utama LED H4 dengan output 8000 lumens. Cahaya terang putih dengan konsumsi daya rendah.Lampu ini bisa untuk mobil yang lampunya masih berjenis halogen atau bohlam seperti Avanza gen 1,Xenia gen 1, Ertiga gen 1,Brio gen 1,Livina gen 1,Dan lain-lain",
+                price: 90000,
                 image: "https://kimi-web-img.moonshot.cn/img/down-id.img.susercontent.com/cc5af7970779cb2fff437e414d44d8e5a43ed518"
             },
             {
                 id: 7,
                 name: "Busi Iridium NGK",
                 category: "Pengapian",
-                description: "Busi iridium premium NGK untuk performa mesin optimal. Umur pakai lebih panjang dari busi standar.",
+                description: "Busi iridium premium NGK untuk performa mesin optimal. Umur pakai lebih panjang dari busi standar.busi Cocok untuk mesin NR Toyota (Avanza, Sienta) dan Daihatsu (Xenia, Terios) terbaru. ",
                 price: 185000,
                 image: "https://images.unsplash.com/photo-1486262715619-67b85e0b08d3?auto=format&fit=crop&w=500&q=80"
             },
             {
                 id: 8,
-                name: "Kampas Rem Belakang",
+                name: "Kampas Rem Belakang Original Toyota dan Daihatsu",
                 category: "Sistem Pengereman",
-                description: "Kampas rem belakang OEM. Keamanan berkendara dengan performa pengereman optimal.",
+                description: "Kampas rem belakang. Keamanan berkendara dengan performa pengereman optimal.bisa untuk Toyota Avanza dan Rush Daihatsu Xenia dan Terios 2004-2018",
                 price: 245000,
                 image: "https://kimi-web-img.moonshot.cn/img/i.ebayimg.com/ffe239d41f798bb5842056fa215f0f23b62a5a0c.png"
             }
@@ -1380,6 +1599,7 @@
         // Cart State
         let cart = [];
         let quantities = {};
+        let orderHistory = JSON.parse(localStorage.getItem('autopro_history')) || [];
 
         // Initialize
         document.addEventListener('DOMContentLoaded', function() {
@@ -1393,6 +1613,19 @@
         // Format Price
         function formatPrice(price) {
             return 'Rp ' + price.toLocaleString('id-ID');
+        }
+
+        // Format Date
+        function formatDate(dateString) {
+            const date = new Date(dateString);
+            const options = { 
+                year: 'numeric', 
+                month: 'long', 
+                day: 'numeric',
+                hour: '2-digit',
+                minute: '2-digit'
+            };
+            return date.toLocaleDateString('id-ID', options);
         }
 
         // Render Products
@@ -1511,6 +1744,128 @@
             document.getElementById('cartSidebar').classList.toggle('active');
         }
 
+        // Open History
+        function openHistory() {
+            renderHistory();
+            document.getElementById('historyModal').classList.add('active');
+        }
+
+        // Close History
+        function closeHistory() {
+            document.getElementById('historyModal').classList.remove('active');
+        }
+
+        // Render History
+        function renderHistory() {
+            const container = document.getElementById('historyContent');
+            
+            if (orderHistory.length === 0) {
+                container.innerHTML = `
+                    <div class="empty-history">
+                        <i class="fas fa-history"></i>
+                        <h3>Belum Ada Riwayat</h3>
+                        <p>Anda belum memiliki pesanan yang tercatat. Mulai belanja sekarang!</p>
+                    </div>
+                `;
+                return;
+            }
+            
+            // Sort by date (newest first)
+            const sortedHistory = [...orderHistory].sort((a, b) => new Date(b.date) - new Date(a.date));
+            
+            let html = '<div class="history-list">';
+            
+            sortedHistory.forEach((order, index) => {
+                html += `
+                    <div class="history-item" data-index="${index}">
+                        <div class="history-header">
+                            <div class="history-date">
+                                <i class="fas fa-calendar-alt"></i>
+                                ${formatDate(order.date)}
+                            </div>
+                            <span class="history-status"><i class="fas fa-check-circle"></i> Selesai</span>
+                        </div>
+                        <div class="history-products">
+                            ${order.items.map(item => `
+                                <div class="history-product">
+                                    <div>
+                                        <span class="history-product-name">${item.name}</span>
+                                        <span class="history-product-qty">(x${item.quantity})</span>
+                                    </div>
+                                    <span class="history-product-price">${formatPrice(item.price * item.quantity)}</span>
+                                </div>
+                            `).join('')}
+                        </div>
+                        <div class="history-footer">
+                            <div>
+                                <div class="history-total-label">Total Pesanan</div>
+                                <div class="history-total">${formatPrice(order.total)}</div>
+                            </div>
+                            <div class="history-actions">
+                                <button class="btn-detail-history" onclick="viewOrderDetail(${order.id})">
+                                    <i class="fas fa-eye"></i> Detail
+                                </button>
+                                <button class="btn-delete-history" onclick="deleteHistoryItem(${order.id})">
+                                    <i class="fas fa-trash"></i> Hapus
+                                </button>
+                            </div>
+                        </div>
+                    </div>
+                `;
+            });
+            
+            html += `
+                <button class="btn-clear-all" onclick="clearAllHistory()">
+                    <i class="fas fa-trash-alt"></i> Hapus Semua Riwayat
+                </button>
+            </div>`;
+            
+            container.innerHTML = html;
+        }
+
+        // View Order Detail
+        function viewOrderDetail(orderId) {
+            const order = orderHistory.find(o => o.id === orderId);
+            if (!order) return;
+            
+            let message = `*DETAIL PESANAN - AUTO PRO*\n\n`;
+            message += `*ID Pesanan:* #${order.id}\n`;
+            message += `*Tanggal:* ${formatDate(order.date)}\n`;
+            message += `*Nama:* ${order.customerName}\n`;
+            message += `*No. WA:* ${order.customerPhone}\n`;
+            message += `*Mobil:* ${order.carType}\n`;
+            message += `*Pembayaran:* ${order.paymentMethod.toUpperCase()}\n\n`;
+            message += `*Produk:*\n`;
+            
+            order.items.forEach(item => {
+                message += `- ${item.name} (x${item.quantity}) = ${formatPrice(item.price * item.quantity)}\n`;
+            });
+            
+            message += `\n*Total: ${formatPrice(order.total)}*\n`;
+            
+            alert(message.replace(/\*/g, '').replace(/\n/g, '\n'));
+        }
+
+        // Delete History Item
+        function deleteHistoryItem(orderId) {
+            if (confirm('Apakah Anda yakin ingin menghapus pesanan ini dari riwayat?')) {
+                orderHistory = orderHistory.filter(o => o.id !== orderId);
+                localStorage.setItem('autopro_history', JSON.stringify(orderHistory));
+                renderHistory();
+                showNotification('Pesanan berhasil dihapus dari riwayat!');
+            }
+        }
+
+        // Clear All History
+        function clearAllHistory() {
+            if (confirm('Apakah Anda yakin ingin menghapus SEMUA riwayat pesanan? Tindakan ini tidak dapat dibatalkan.')) {
+                orderHistory = [];
+                localStorage.removeItem('autopro_history');
+                renderHistory();
+                showNotification('Semua riwayat pesanan telah dihapus!');
+            }
+        }
+
         // Open Checkout
         function openCheckout() {
             if (cart.length === 0) {
@@ -1566,6 +1921,23 @@
             
             const totalPrice = cart.reduce((sum, item) => sum + (item.price * item.quantity), 0);
             
+            // Save to history
+            const orderData = {
+                id: Date.now(),
+                date: new Date().toISOString(),
+                customerName: name,
+                customerPhone: phone,
+                carType: carType,
+                orderDate: date,
+                orderTime: time,
+                items: [...cart],
+                total: totalPrice,
+                paymentMethod: paymentMethod
+            };
+            
+            orderHistory.push(orderData);
+            localStorage.setItem('autopro_history', JSON.stringify(orderHistory));
+            
             // Create WhatsApp message
             let message = `*PESANAN BARU - AUTO PRO*\n\n`;
             message += `*Data Pemesan:*\n`;
@@ -1600,6 +1972,11 @@
             // Clear cart
             cart = [];
             updateCart();
+            
+            // Reset form
+            document.getElementById('orderForm').reset();
+            document.getElementById('orderDate').valueAsDate = new Date();
+            document.querySelectorAll('.payment-option').forEach(opt => opt.classList.remove('selected'));
         }
 
         // Open Chat
@@ -1663,6 +2040,7 @@
         document.addEventListener('keydown', (e) => {
             if (e.key === 'Escape') {
                 closeCheckout();
+                closeHistory();
                 document.getElementById('successModal').classList.remove('active');
                 if (document.getElementById('cartSidebar').classList.contains('active')) {
                     toggleCart();
